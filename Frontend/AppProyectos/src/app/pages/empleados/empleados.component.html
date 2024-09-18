@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Administración de Empleados" blockClass="pc-component">
+            <h5 class="mb-3">
+                <a href="nuevoempleado" class="btn btn-info"><i class="fas fa-plus"></i> Nuevo</a>
+            </h5>
+
+            <div class="card tbl-card">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nombres</th>
+                                <th class="text-center">Correo</th>
+                                <th class="text-center">Rol</th>
+                                <th class="text-center" style="width: 150px;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            @for (empleado of listaEmpleados; track $index) {
+                            <tr>
+                                <td class="text-center">{{ empleado.nombres }} {{ empleado.apellidos }}</td>
+                                <td class="text-center">{{ empleado.correo }}</td>
+                                @switch( empleado.rol){
+                                    @case ('S') {
+                                        <td class="text-center">Supervisor</td>
+                                    }
+                                    @case ('D') {
+                                        <td class="text-center">Desarrollador</td>
+                                    }
+                                    @case ('Q') {
+                                        <td class="text-center">Control de Calidad</td>
+                                    }
+                                }
+
+                                <td class="text-center">
+                                    <button type="button" class="btn text-primary"
+                                        [routerLink]="['/editar-empleado/', empleado.id_empleado]">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button (click)="eliminar(empleado.id_empleado)" type="button"
+                                        class="btn text-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="{{tituloPantalla}}" blockClass="pc-component">
+            <form [formGroup]="form_Empleado" novalidate (ngSubmit)="guardar()">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="nombres">Nombres</label>
+                            <input formControlName="nombres" type="text" class="form-control" id="nombres" />
+                            <div *ngIf="form_Empleado.get('nombres').invalid && form_Empleado.get('nombres').touched">
+                                <small *ngIf="form_Empleado.get('nombres').hasError('required')"
+                                    style="color: red">Nombre es requerido</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="apellidos">Apellidos</label>
+                            <input formControlName="apellidos" type="text" class="form-control" id="apellidos" />
+                            <div
+                                *ngIf="form_Empleado.get('apellidos').invalid && form_Empleado.get('apellidos').touched">
+                                <small *ngIf="form_Empleado.get('apellidos').hasError('required')"
+                                    style="color: red">Apellido es requerido</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="correo">Email</label>
+                            <input formControlName="correo" type="text" class="form-control" id="correo" />
+                            <div *ngIf="form_Empleado.get('correo').invalid && form_Empleado.get('correo').touched">
+                                <small *ngIf="form_Empleado.get('correo').hasError('required')"
+                                    style="color: red">Correo
+                                    es requerido</small>
+                                <small *ngIf="form_Empleado.get('correo').hasError('email')"
+                                    style="color: red">El formato del correo no es adecuado</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="rol" class="form-label">Rol de Empleado</label>
+                            <select class="form-control" id="rol" formControlName="rol">
+                                <option>Seleccione una opción</option>
+                                <option value="S">Supervisor</option>
+                                <option value="D">Desarrollador</option>
+                                <option value="Q">Control de Calidad</option>
+                            </select>
+                            <div *ngIf="form_Empleado.get('rol').invalid && form_Empleado.get('rol').touched">
+                                <small *ngIf="form_Empleado.get('rol').hasError('required')" style="color: red">Rol
+                                    es requerido</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 offset-md-4">
+                        <div class="d-grid mt-3">
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="form_Empleado.invalid">{{nombreBoton}}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </app-card>
+    </div>
+</div>

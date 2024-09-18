@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="{{tituloPantalla}}" blockClass="pc-component">
+            <form [formGroup]="form_Proyecto" novalidate (ngSubmit)="guardar()">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="nombres">Nombre de Proyecto</label>
+                            <input formControlName="nombre_proyecto" type="text" class="form-control" id="nombres" />
+                            <div
+                                *ngIf="form_Proyecto.get('nombre_proyecto').invalid && form_Proyecto.get('nombre_proyecto').touched">
+                                <small *ngIf="form_Proyecto.get('nombre_proyecto').hasError('required')"
+                                    style="color: red">Nombre es requerido</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label" for="descripcion">Descripción</label>
+                            <textarea formControlName="descripcion" type="text" class="form-control"
+                                id="descripcion"></textarea>
+                            <div
+                                *ngIf="form_Proyecto.get('descripcion').invalid && form_Proyecto.get('descripcion').touched">
+                                <small *ngIf="form_Proyecto.get('descripcion').hasError('required')"
+                                    style="color: red">Descripción es requerido</small>
+                                <small *ngIf="form_Proyecto.get('descripcion').hasError('maxlength')"
+                                    style="color: red">No puede exceder de 100 caracteres</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="inicio">Fecha de Inicio</label>
+                            <input type="date" class="form-control" id="inicio" formControlName="fecha_inicio" />
+                            <div
+                                *ngIf="form_Proyecto.get('fecha_inicio').invalid && form_Proyecto.get('fecha_inicio').touched">
+                                <small *ngIf="form_Proyecto.get('fecha_inicio').hasError('required')"
+                                    style="color: red">Fecha de inicio
+                                    es requerido</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="fin">Fecha de Fin</label>
+                            <input type="date" class="form-control" id="fin" formControlName="fecha_fin" />
+                            <div
+                                *ngIf="form_Proyecto.get('fecha_fin').invalid && form_Proyecto.get('fecha_fin').touched">
+                                <small *ngIf="form_Proyecto.get('fecha_fin').hasError('required')"
+                                    style="color: red">Fecha de fin
+                                    es requerido</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="estado" class="form-label">Estado de Proyecto</label>
+                            <select class="form-control" id="estado" formControlName="estado_proyecto">
+                                <option>Seleccione una opción</option>
+                                <option value="P">Planificado</option>
+                                <option value="I">Iniciado</option>
+                                <option value="C">Completado</option>
+                                <option value="X">Cancelado</option>
+                            </select>
+                            <div
+                                *ngIf="form_Proyecto.get('fecha_fin').invalid && form_Proyecto.get('fecha_fin').touched">
+                                <small *ngIf="form_Proyecto.get('fecha_fin').hasError('required')"
+                                    style="color: red">Estado de proyecto
+                                    es requerido</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 offset-md-4">
+                        <div class="d-grid mt-3">
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="form_Proyecto.invalid">{{nombreBoton}}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </app-card>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="{{tituloPantalla}}" blockClass="pc-component">
+
+            <h5 class="mb-3">
+                <a href="nuevaasignacion" class="btn btn-info"><i class="fas fa-plus"></i> Nuevo Asignación</a>
+            </h5>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="rol" class="form-label">Seleccionar Proyecto</label>
+                        <select class="form-control" (change)="seleccionarProyecto($event)">
+                            <option>Seleccione una opcion</option>
+                            @for (proyecto of listaProyectos; track $index) {
+                            <option value="{{ proyecto.id_proyecto }}">{{ proyecto.nombre_proyecto }}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="existeProyecto" class="mt-3" #pdfContent id="pdfContent">
+
+                <div class="text-center">
+                    <h4>{{ proyecto.nombre_proyecto }}</h4>
+                </div>
+
+                <div>
+                    <label for="" class="fw-bold">Descripción:</label>
+                    <p>{{ proyecto.descripcion }}</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <label for="" class="fw-bold">Fecha de Inicio:</label>
+                        <p>{{ proyecto.fecha_inicio }}</p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="" class="fw-bold">Fecha de Finalización:</label>
+                        <p>{{ proyecto.fecha_fin }}</p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="" class="fw-bold">Estado del Proyecto:</label>
+                        @switch (proyecto.estado_proyecto) {
+                            @case ('P') {
+                                <p>Planificado</p>
+                            }
+                            @case ('I') {
+                                <p>Iniciado</p>
+                            }
+                            @case ('C') {
+                                <p>Completado</p>
+                            }
+                            @case ('X') {
+                                <p>Cancelado</p>
+                            } 
+                        }                       
+                    </div>
+                </div>
+
+                <div class="card tbl-card">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Proyecto</th>
+                                    <th class="text-center">Nombre Empleados</th>
+                                    <th class="text-center">Rol</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @for (proyectosempleado of listaProyectosEmpleados; track $index) {
+                                <tr>
+                                    <td class="text-center">{{ proyectosempleado.nombre_proyecto }}</td>
+                                    <td class="text-center">{{ proyectosempleado.nombres }} {{
+                                        proyectosempleado.apellidos }}</td>
+                                    @switch( proyectosempleado.rol ){
+                                    @case ('S') {
+                                    <td class="text-center">Supervisor</td>
+                                    }
+                                    @case ('D') {
+                                    <td class="text-center">Desarrollador</td>
+                                    }
+                                    @case ('Q') {
+                                    <td class="text-center">Control de Calidad</td>
+                                    }
+                                    }
+
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 offset-md-4">
+                        <div class="d-grid mt-3">
+                            <button class="btn btn-success" (click)="generarPDF()"><i class="far fa-file-pdf"></i> Generar
+                                Reporte PDF</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </app-card>
+    </div>
+</div>

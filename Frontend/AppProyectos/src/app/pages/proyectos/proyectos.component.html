@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Administración de Proyectos" blockClass="pc-component">
+            <h5 class="mb-3">
+                <a href="nuevoproyecto" class="btn btn-info"><i class="fas fa-plus"></i> Nuevo</a>
+            </h5>
+
+            <div class="card tbl-card">
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nombre Proyecto</th>
+                                <th class="text-center">Descripción</th>
+                                <th class="text-center">Fecha Inicio</th>
+                                <th class="text-center">Fecha Fin</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center" style="width: 150px;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            @for (proyecto of listaProyectos; track $index) {
+                            <tr>
+                                <td class="text-center">{{ proyecto.nombre_proyecto }}</td>
+                                <td class="text-center">{{ proyecto.descripcion }}</td>
+                                <td class="text-center">{{ proyecto.fecha_inicio }}</td>
+                                <td class="text-center">{{ proyecto.fecha_fin }}</td>
+                                @switch( proyecto.estado_proyecto){
+                                    @case ('P') {
+                                        <td class="text-center">Planificado</td>
+                                    }
+                                    @case ('I') {
+                                        <td class="text-center">Iniciado</td>
+                                    }
+                                    @case ('C') {
+                                        <td class="text-center">Completado</td>
+                                    }
+                                    @case ('X') {
+                                        <td class="text-center">Cancelado</td>
+                                    }
+                                }
+
+                                <td class="text-center">
+                                    <button type="button" class="btn text-primary"
+                                        [routerLink]="['/editar-proyecto/', proyecto.id_proyecto]">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button (click)="eliminar(proyecto.id_proyecto)" type="button"
+                                        class="btn text-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
